@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">BookShelf</string>
+
+    <string name="welcome">Welcome</string>
+    <string name="sign_in">Sign In</string>
+    <string name="create_new_account">Create New Account</string>
+    <string name="welcome_splash_logo">Welocome logo</string>
+    <string name="login">Login</string>
+    <string name="sign_up_using">Or Sign Up Using</string>
+    <string name="signup">SIGN UP</string>
+    <string name="username">Username</string>
+    <string name="choose_country">Choose Your Country</string>
+    <string name="type_username">Type your username</string>
+    <string name="type_password">Type your password</string>
+    <string name="firstname">Firstname</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="song_logo">Book Image</string>
+    <string name="hits">Hits</string>
+    <string name="book">Book</string>
+    <string name="sign_out">Sign out</string>
+    <string name="sort_by">Sort By :</string>
+    <string name="summary">Summary</string>
+    <string name="summary_content">Books are printed or digital literary works that contain written, printed, or illustrated pages bound together. They are a fundamental medium for storing, sharing, and conveying information, knowledge, stories, and ideas. Books can cover a wide range of topics and genres, including fiction, non-fiction, academic, reference, biographies, self-help, and more. They have played a significant role in human history, serving as a primary means of preserving and transmitting culture, history, and literature across generations. With the advent of digital technology, books are now available in various formats, including e-books, audiobooks, and online publications, making them more accessible to a global audience.</string>
+    <string name="success_user_created">User Created Succesfully. Please Click on Login Button to go to login Page</string>
+    <string name="comic_image">comic image</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="favourite_button">favourite button</string>
+
+</resources>
