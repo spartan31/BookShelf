@@ -30,7 +30,7 @@
                 android:layout_height="146dp"
                 android:layout_gravity="center"
                 android:src="@drawable/app_logo"
-                android:contentDescription="@string/inner_animation_image" />
+                android:contentDescription="@string/app_name" />
 
         </FrameLayout>
 
