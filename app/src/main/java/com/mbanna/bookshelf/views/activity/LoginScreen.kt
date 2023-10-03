@@ -80,26 +80,26 @@ class LoginScreen : AppCompatActivity(), View.OnClickListener {
     fun startObserving(){
         viewModel.userNotAvailable.observe(this) {
             if (it == true) {
-                binding.inputUsername.error = "User not exists. Please signup"
+                binding.inputUsername.error = resources.getString(R.string.user_not_exist)
                 binding.inputUsername.isEnabled = true
             }
         }
         viewModel.inValidPassword.observe(this) {
             if (it == true) {
-                binding.inputPassword.error = "Wrong Password"
+                binding.inputPassword.error = resources.getString(R.string.wrong_password)
                 binding.inputPassword.isEnabled = true
             }
         }
 
         viewModel.emptyUsername.observe(this) {
             if (it == true) {
-                binding.inputUsername.error = "Please enter this field"
+                binding.inputUsername.error = resources.getString(R.string.enter_field)
                 binding.inputUsername.isEnabled = true
             }
         }
         viewModel.emptyPassword.observe(this) {
             if (it == true) {
-                binding.inputPassword.error = "Please enter this field"
+                binding.inputPassword.error = resources.getString(R.string.enter_field)
                 binding.inputPassword.isEnabled = true
             }
         }

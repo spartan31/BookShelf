@@ -27,5 +27,11 @@
     <string name="description">Description</string>
     <string name="favourite_button">favourite button</string>
     <string name="password">Password</string>
+    <string name="wrong_password">Wrong Password</string>
+    <string name="password_not_match">Password does not match</string>
+    <string name="strong_password">Please Must Contain Special Character , Number , Small and Capital Letter and more than 8 characters</string>
+    <string name="enter_field">Please enter this field</string>
+    <string name="user_not_exist">User not exists. Please signup</string>
+    <string name="user_already_exist">User already exists</string>
 
 </resources>

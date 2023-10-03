@@ -60,46 +60,45 @@ class SignUpFragment : Fragment(), View.OnClickListener {
     private fun observeFields() {
         viewModel.emptyUsername.observe(viewLifecycleOwner) {
             if (it == true) {
-                binding.inputName.error = "Please enter this field"
+                binding.inputName.error = resources.getString(R.string.enter_field)
                 binding.inputName.requestFocus()
             }
         }
         viewModel.emptyPassword.observe(viewLifecycleOwner) {
             if (it == true) {
-                binding.inputPassword.error = "Please enter this field"
+                binding.inputPassword.error = resources.getString(R.string.enter_field)
                 binding.inputPassword.requestFocus()
             }
         }
         viewModel.emptyConfirmPass.observe(viewLifecycleOwner) {
             if (it == true) {
-                binding.confirmInputPassword.error = "Please enter this field"
+                binding.confirmInputPassword.error = resources.getString(R.string.enter_field)
                 binding.confirmInputPassword.requestFocus()
             }
         }
 
         viewModel.weakPassword.observe(viewLifecycleOwner) {
             if (it == true) {
-                binding.inputPassword.error =
-                    "Please Must Contain Special Character , Number , Small and Capital Letter and more than 8 characters"
+                binding.inputPassword.error = resources.getString(R.string.strong_password)
                 binding.inputPassword.requestFocus()
             }
         }
 
         viewModel.userAlreadyAvailable.observe(viewLifecycleOwner) {
             if (it == true) {
-                binding.inputName.error = "User already exists"
+                binding.inputName.error = resources.getString(R.string.user_already_exist)
                 binding.inputName.requestFocus()
             }
         }
         viewModel.inValidPassword.observe(viewLifecycleOwner) {
             if (it == true) {
-                binding.confirmInputPassword.error = "Password does not match"
+                binding.confirmInputPassword.error = resources.getString(R.string.password_not_match)
                 binding.confirmInputPassword.requestFocus()
             }
         }
         viewModel.countyNotSelected.observe(viewLifecycleOwner) {
             if (it == true) {
-                binding.countrySpinner.prompt = "Please Choose Your Country"
+                binding.countrySpinner.prompt =  resources.getString(R.string.choose_country)
             }
         }
 
