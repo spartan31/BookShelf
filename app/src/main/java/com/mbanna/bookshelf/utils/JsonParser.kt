@@ -20,6 +20,8 @@ object JsonParser {
                 val countryName = countriesObject.getJSONObject(countryCode).getString("country")
                 countriesList.add(countryName)
             }
+
+            countriesList.sort() ;
         } catch (e: Exception) {
             e.printStackTrace()
         }

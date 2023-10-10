@@ -33,7 +33,7 @@ object FavoriteManager {
         return favoriteIds.contains(itemId)
     }
 
-    private fun getFavoriteIds(context: Context): Set<String> {
+     fun getFavoriteIds(context: Context): Set<String> {
         val sharedPreferences = getSharedPreferences(context)
         return sharedPreferences.getStringSet(KEY_FAVORITES, mutableSetOf()) ?: mutableSetOf()
     }

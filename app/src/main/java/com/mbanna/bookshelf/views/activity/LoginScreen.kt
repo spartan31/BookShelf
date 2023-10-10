@@ -2,6 +2,7 @@ package com.mbanna.bookshelf.views.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
@@ -55,8 +56,8 @@ class LoginScreen : AppCompatActivity(), View.OnClickListener {
             inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
         }
         val intent = Intent(this, BookShelf::class.java)
-        finish()
         startActivity(intent)
+        finish()
     }
 
     private fun addFragment(fragment: Fragment) {
@@ -121,12 +122,25 @@ class LoginScreen : AppCompatActivity(), View.OnClickListener {
             binding.loginBtn -> {
                 viewModel.perFormLogin(id = binding.inputUsername.text.toString(), password = binding.inputPassword.text.toString())
             }
+
+            binding.tvShowPass ->{
+                if (viewModel.passwordVisibility.value != true){
+                     binding.inputPassword.inputType =  InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                    binding.tvShowPass.text = resources.getString(R.string.hide_password)
+                    viewModel.passwordVisibility.value = true
+                }else{
+                    binding.inputPassword.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                    binding.tvShowPass.text = resources.getString(R.string.show_password)
+                    viewModel.passwordVisibility.value = false
+                }
+            }
         }
     }
 
     private fun attachListeners() {
         binding.signup.setOnClickListener(this)
         binding.loginBtn.setOnClickListener(this)
+        binding.tvShowPass.setOnClickListener(this)
     }
 
 }

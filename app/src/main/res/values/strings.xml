@@ -33,5 +33,10 @@
     <string name="enter_field">Please enter this field</string>
     <string name="user_not_exist">User not exists. Please signup</string>
     <string name="user_already_exist">User already exists</string>
+    <string name="show_password">Show Password</string>
+    <string name="hide_password">Hide Password</string>
+    <string name="btn_hits">  Hits  </string>
+    <string name="btn_title">  Title  </string>
+    <string name="favorite">  Favorite  </string>
 
 </resources>

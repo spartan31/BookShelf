@@ -27,6 +27,9 @@ class SignUpViewModel(private val userRepo: UserRepository) : ViewModel() {
     var emptyPassword = MutableLiveData<Boolean>()
     var emptyConfirmPass = MutableLiveData<Boolean>()
     var countyNotSelected = MutableLiveData<Boolean>()
+    var passwordVisibility = MutableLiveData<Boolean>(false)
+    var confirmPasswordVisibility = MutableLiveData<Boolean>(false)
+    var passwordErrorMessage = ""
 
 
 
@@ -84,7 +87,7 @@ class SignUpViewModel(private val userRepo: UserRepository) : ViewModel() {
         } else if (checkUniqueUserId(inputUsername.value!!) != Constants.STATUS_OK) {
             userAlreadyAvailable.value = true
             false
-        } else if (inputPassword.value == null || !isValidPassword(inputPassword.value!!)) {
+        } else if (inputPassword.value == null || validatePassword(inputPassword.value!!)) {
             weakPassword.value = true
             false
         } else if (inputConfirmPassword.value == null || inputConfirmPassword.value!!.isEmpty() ||  inputPassword.value != inputConfirmPassword.value) {
@@ -95,9 +98,34 @@ class SignUpViewModel(private val userRepo: UserRepository) : ViewModel() {
         }
     }
 
-    private fun isValidPassword(password: String): Boolean {
-        val pattern = "^(?=.*[0-9])(?=.*[!@#\$%&()])(?=.*[a-z])(?=.*[A-Z]).{8,}$".toRegex()
-        return pattern.matches(password)
+    private fun validatePassword(password: String): Boolean {
+        val lengthPattern = "^.{8,}$".toRegex()
+        val numberPattern = ".*\\d.*".toRegex()
+        val specialCharPattern = ".*[!@#\$%&()].*".toRegex()
+        val lowercasePattern = ".*[a-z].*".toRegex()
+        val uppercasePattern = ".*[A-Z].*".toRegex()
+
+        if (!lengthPattern.matches(password)) {
+            passwordErrorMessage =  Constants.ERROR_SMALL_PASSWORD
+            return true
+        }
+        if (!numberPattern.matches(password)) {
+            passwordErrorMessage =  Constants.ERROR_CONTAIN_NUM
+            return true
+        }
+        if (!specialCharPattern.matches(password)) {
+            passwordErrorMessage = Constants.ERROR_CONTAIN_SPECIAL_CHAR
+            return true
+        }
+        if (!lowercasePattern.matches(password)) {
+            passwordErrorMessage  = Constants.ERROR_CONTAIN_LOWERCASE
+        }
+        if (!uppercasePattern.matches(password)) {
+            passwordErrorMessage  = Constants.ERROR_CONTAIN_UPPERCASE
+            return true
+        }
+        return false
     }
+
 
 }

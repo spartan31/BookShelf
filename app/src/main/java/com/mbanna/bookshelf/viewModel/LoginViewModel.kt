@@ -12,15 +12,12 @@ import kotlinx.coroutines.*
 
 class LoginViewModel(private val userRepository: UserRepository ) : ViewModel() {
 
-     var userId = MutableLiveData<String>()
-    var inputUsername = MutableLiveData<String>()
-    var inputPassword = MutableLiveData<String>()
-    var check : Boolean = false
     var userNotAvailable = MutableLiveData<Boolean>()
     var navigateToHomeScreen = MutableLiveData<Boolean>()
     var inValidPassword = MutableLiveData<Boolean>()
     var emptyUsername = MutableLiveData<Boolean>()
     var emptyPassword = MutableLiveData<Boolean>()
+    var passwordVisibility = MutableLiveData<Boolean>(false)
 
     private suspend fun readLoginData(id: String, password: String): User? {
         return userRepository.readLoginData(id, password)

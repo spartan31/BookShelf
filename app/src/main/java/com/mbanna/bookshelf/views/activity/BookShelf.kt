@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mbanna.bookshelf.R
+import com.mbanna.bookshelf.utils.Constants
 import com.mbanna.bookshelf.utils.FavoriteManager
 import com.mbanna.bookshelf.utils.JsonParser
 import com.mbanna.bookshelf.viewModel.BookShelfViewModel
@@ -36,6 +37,7 @@ class BookShelf : AppCompatActivity(), BookShelvesAdapter.SelfAdapterCallback, V
     private fun attachListeners() {
         binding.btnHits.setOnClickListener(this)
         binding.btnTitle.setOnClickListener(this)
+        binding.btnFavBy.setOnClickListener(this)
     }
 
 
@@ -60,8 +62,8 @@ class BookShelf : AppCompatActivity(), BookShelvesAdapter.SelfAdapterCallback, V
         editor?.putBoolean("flag", false)
         editor?.apply()
         val intent = Intent( this, LoginScreen::class.java)
-        finish()
         startActivity(intent)
+        finish()
     }
 
 
@@ -72,10 +74,14 @@ class BookShelf : AppCompatActivity(), BookShelvesAdapter.SelfAdapterCallback, V
         )[BookShelfViewModel::class.java]
 
         val books = JsonParser.parseJsonToBookItems(this,"ZEDF.json")
+        viewModel.bookList.clear()
         viewModel.bookList.addAll(books)
+        viewModel.favoriteIds = HashSet()
+        viewModel.favoriteIds = FavoriteManager.getFavoriteIds(this)
         adapter = BookShelvesAdapter( bookList = books , cellClickListener = this)
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = adapter
+        refreshList(viewModel.bookSortType)
     }
 
     override fun onFavouriteClick(position: Int) {
@@ -102,25 +108,43 @@ class BookShelf : AppCompatActivity(), BookShelvesAdapter.SelfAdapterCallback, V
     override fun onClick(p0: View?) {
         when(p0){
             binding.btnTitle ->{
-                refreshList(true)
+                refreshList(Constants.SORT_BY_TITLE)
             }
 
             binding.btnHits -> {
-                refreshList(false)
+                refreshList(Constants.SORT_BY_HITS)
+            }
+            binding.btnFavBy -> {
+                refreshList(Constants.SORT_BY_FAVOURITE)
             }
         }
     }
 
-    private fun refreshList(button: Boolean) {
-        if (button){
-            binding.btnHits.backgroundTintList =ColorStateList.valueOf(Color.GRAY)
-            binding.btnTitle.backgroundTintList = null
-            viewModel.bookSortType = true
-        }else{
-            binding.btnTitle.backgroundTintList =ColorStateList.valueOf(Color.GRAY)
-            binding.btnHits.backgroundTintList = null
-            viewModel.bookSortType = false
+    private fun refreshList(sortBy: Int) {
+        when(sortBy){
+            Constants.SORT_BY_TITLE -> {
+                binding.btnHits.backgroundTintList =ColorStateList.valueOf(Color.GRAY)
+                binding.btnFavBy.backgroundTintList =ColorStateList.valueOf(Color.GRAY)
+                binding.btnTitle.backgroundTintList = null
+                viewModel.bookSortType = Constants.SORT_BY_TITLE
+            }
+
+            Constants.SORT_BY_HITS -> {
+                binding.btnTitle.backgroundTintList =ColorStateList.valueOf(Color.GRAY)
+                binding.btnFavBy.backgroundTintList =ColorStateList.valueOf(Color.GRAY)
+                binding.btnHits.backgroundTintList = null
+                viewModel.bookSortType = Constants.SORT_BY_HITS
+            }
+
+            Constants.SORT_BY_FAVOURITE -> {
+                binding.btnTitle.backgroundTintList =ColorStateList.valueOf(Color.GRAY)
+                binding.btnHits.backgroundTintList =ColorStateList.valueOf(Color.GRAY)
+                binding.btnFavBy.backgroundTintList = null
+                viewModel.bookSortType = Constants.SORT_BY_FAVOURITE
+            }
         }
+
+        viewModel.favoriteIds = FavoriteManager.getFavoriteIds(this)
         viewModel.sortBasedOnSelection()
         adapter.update(viewModel.bookList)
     }
